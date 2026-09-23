@@ -1,0 +1,32 @@
+{
+  "name": "automotive-reference-homepage",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "visual": "node scripts/visual-reference.mjs",
+    "lighthouse": "lighthouse http://localhost:4321 --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "latest",
+    "@fontsource-variable/montserrat": "latest",
+    "@tailwindcss/vite": "latest",
+    "astro": "^5.18.2",
+    "gsap": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "lighthouse": "latest",
+    "playwright": "latest",
+    "rollup": "npm:@rollup/wasm-node@4.63.1",
+    "typescript": "latest"
+  },
+  "overrides": {
+    "rollup": "$rollup"
+  }
+}

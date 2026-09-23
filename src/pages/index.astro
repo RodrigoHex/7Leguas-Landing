@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlobalHeader from '../components/global/GlobalHeader.astro';
+import Hero from '../components/hero/Hero.astro';
+import CategoryRail from '../components/finder/CategoryRail.astro';
+import PromotionSection from '../components/promotions/PromotionSection.astro';
+import FeaturedTyres from '../components/products/FeaturedTyres.astro';
+import SiteFooter from '../components/footer/SiteFooter.astro';
+import WhatsAppQuote from '../components/global/WhatsAppQuote.astro';
+---
+
+<BaseLayout>
+  <GlobalHeader />
+  <main id="main-content">
+    <Hero />
+    <CategoryRail />
+    <PromotionSection />
+    <FeaturedTyres />
+  </main>
+  <SiteFooter />
+  <WhatsAppQuote />
+</BaseLayout>
+
+<script src="../scripts/carousels.ts"></script>

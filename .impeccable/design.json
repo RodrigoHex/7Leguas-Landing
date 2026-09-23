@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01T22:40:00.000Z",
+  "title": "Design System: TireLab Reference System",
+  "extensions": {
+    "colorMeta": {
+      "signal-yellow": { "role": "primary", "displayName": "Signal Yellow", "canonical": "#ffd900", "tonalRamp": ["#2b2400", "#554800", "#806c00", "#aa9000", "#d5b500", "#ffd900", "#ffe66b", "#fff8d5"] },
+      "performance-ink": { "role": "neutral", "displayName": "Performance Ink", "canonical": "#1f1f1f", "tonalRamp": ["#111111", "#1f1f1f", "#3a3a3a", "#565656", "#737373", "#969696", "#c4c4c4", "#f2f2f2"] },
+      "road-mist": { "role": "neutral", "displayName": "Road Mist", "canonical": "#f1f1f1", "tonalRamp": ["#242424", "#454545", "#686868", "#8d8d8d", "#b2b2b2", "#d7d7d7", "#f1f1f1", "#fafafa"] },
+      "clean-paper": { "role": "neutral", "displayName": "Clean Paper", "canonical": "#fcfcfc", "tonalRamp": ["#252525", "#494949", "#6d6d6d", "#929292", "#b8b8b8", "#dedede", "#f3f3f3", "#fcfcfc"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Automotive Display", "purpose": "Hero and major media statements only." },
+      "headline": { "displayName": "Section Headline", "purpose": "Primary section landmarks." },
+      "title": { "displayName": "Editorial Title", "purpose": "Cards and substantial content modules." },
+      "body": { "displayName": "Editorial Body", "purpose": "Explanatory copy and form content." },
+      "label": { "displayName": "Action Label", "purpose": "Buttons, navigation, and compact actions." }
+    },
+    "shadows": [
+      { "name": "solid-header", "value": "0 6px 24px rgb(0 0 0 / 0.12)", "purpose": "Separates the solid fixed header from scrolled content." },
+      { "name": "card-reserved", "value": "0 8px 24px rgb(0 0 0 / 0.12)", "purpose": "Reserved for explicit elevated card states." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Shared hover, menu, and state easing." },
+      { "name": "fast", "value": "180ms cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Control and navigation feedback." },
+      { "name": "medium", "value": "360ms cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Header and larger surface transitions." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "767px" },
+      { "name": "compact-desktop", "value": "1100px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-signal",
+      "description": "Primary action on light or neutral ground.",
+      "html": "<button class=\"ds-btn-signal\">Descubre más</button>",
+      "css": ".ds-btn-signal{min-height:44px;border:0;border-radius:var(--radius-control);padding:0 16px;background:var(--color-yellow);color:var(--color-ink);font:800 13px/1 var(--font-body);transition:background var(--transition-fast),transform var(--transition-fast)}.ds-btn-signal:hover{background:var(--color-yellow-hover);transform:translateY(-1px)}.ds-btn-signal:focus-visible{outline:3px solid var(--color-yellow);outline-offset:3px}"
+    },
+    {
+      "name": "Dark Finder Button",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "High-contrast action embedded in the signal-yellow finder.",
+      "html": "<button class=\"ds-btn-dark\">Buscar por modelo de auto</button>",
+      "css": ".ds-btn-dark{min-height:44px;border:0;border-radius:var(--radius-control);padding:0 16px;background:var(--color-ink);color:var(--color-paper);font:800 13px/1 var(--font-body);transition:background var(--transition-fast)}.ds-btn-dark:hover{background:#333}.ds-btn-dark:focus-visible{outline:3px solid var(--color-yellow);outline-offset:3px}"
+    },
+    {
+      "name": "Hero Outline Button",
+      "kind": "button",
+      "description": "Secondary action over photographic media.",
+      "html": "<button class=\"ds-btn-outline\">Descubre ahora</button>",
+      "css": ".ds-btn-outline{min-height:44px;border:1px solid rgb(255 255 255/.72);border-radius:var(--radius-control);padding:0 16px;background:rgb(255 255 255/.04);color:var(--color-paper);font:800 13px/1 var(--font-body);transition:background var(--transition-fast)}.ds-btn-outline:hover{background:rgb(255 255 255/.14)}.ds-btn-outline:focus-visible{outline:3px solid var(--color-yellow);outline-offset:3px}"
+    },
+    {
+      "name": "Dealer Search Field",
+      "kind": "input",
+      "description": "Compact location input for the dark dealer module.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-city\">Ciudad</label><input class=\"ds-field\" id=\"ds-city\" placeholder=\"Ciudad\">",
+      "css": ".ds-field-label{display:block;margin-bottom:6px;color:var(--color-paper);font:800 12px/1 var(--font-body)}.ds-field{width:322px;height:48px;border:0;border-radius:var(--radius-control);padding:0 16px;background:var(--color-paper);color:var(--color-ink);font:400 14px/1.4 var(--font-body)}.ds-field:focus-visible{outline:3px solid var(--color-yellow);outline-offset:3px}"
+    },
+    {
+      "name": "Main Navigation",
+      "kind": "nav",
+      "description": "Heavy geometric navigation with signal identity tile.",
+      "html": "<nav class=\"ds-nav\"><strong class=\"ds-mark\">TIRELAB</strong><a href=\"#\">Llantas</a><a href=\"#\">Consejos</a></nav>",
+      "css": ".ds-nav{display:flex;height:64px;align-items:center;gap:32px;padding:0 24px;background:var(--color-ink);color:var(--color-paper);font:800 16px/1 var(--font-body)}.ds-nav a{color:inherit;text-decoration:none}.ds-nav a:hover{text-decoration:underline;text-underline-offset:8px}.ds-nav a:focus-visible{outline:3px solid var(--color-yellow);outline-offset:3px}.ds-mark{padding:10px 18px;background:var(--color-yellow);color:var(--color-ink);font-size:12px;transform:skew(-5deg)}"
+    },
+    {
+      "name": "Editorial Media Card",
+      "kind": "card",
+      "refersTo": "editorial-card",
+      "description": "Square photographic card with strong top-aligned copy.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-media\"></div><div class=\"ds-card-copy\"><h3>Llantas para automóvil</h3><p>Diseñadas para cada trayecto.</p></div></article>",
+      "css": ".ds-card{position:relative;width:303px;height:430px;overflow:hidden;border-radius:0;background:#333;color:var(--color-paper)}.ds-card-media{position:absolute;inset:0;background:linear-gradient(145deg,#151515,#777)}.ds-card-copy{position:absolute;inset:0;padding:28px 16px;background:linear-gradient(180deg,rgb(0 0 0/.72),transparent 58%,rgb(0 0 0/.62))}.ds-card h3{margin:0;font:900 24px/32px var(--font-display);letter-spacing:-.025em}.ds-card p{margin-top:10px;font:400 12px/18px var(--font-body)}"
+    },
+    {
+      "name": "Rail Control",
+      "kind": "button",
+      "description": "Accessible previous/next control for horizontal editorial rails.",
+      "html": "<button class=\"ds-rail\" aria-label=\"Siguiente\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m9 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-rail{display:grid;width:44px;height:44px;place-items:center;border:0;border-radius:var(--radius-control);background:var(--color-paper);color:var(--color-ink)}.ds-rail svg{width:18px;fill:none;stroke:currentColor;stroke-width:2}.ds-rail:hover{background:#eee}.ds-rail:focus-visible{outline:3px solid var(--color-yellow);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Performance Showroom",
+    "overview": "The current system treats the homepage as a measured automotive showroom: full-bleed photographic moments alternate with quiet road-mist fields, dense information rails, and decisive signal-yellow actions. It is editorial rather than app-like, with square media, compressed high-weight headings, and long vertical pacing derived from the audited reference. This is intentionally a replaceable reference world. Its geometry and behavioral patterns are durable; the temporary identity and content are not future brand commitments.",
+    "keyCharacteristics": ["Full-height media-led hero with a docked finder.", "Square editorial cards, dense rails, and strong typographic hierarchy.", "Signal yellow reserved for actions, selection, and focus.", "Responsive art direction rather than merely stacking desktop content.", "HTML-first interaction with selective scroll choreography."],
+    "rules": [
+      { "name": "The Signal Rule", "body": "Yellow identifies action or state; it is never a decorative page wash.", "section": "colors" },
+      { "name": "The Ground Rule", "body": "Editorial sections sit directly on the cool road-mist field unless the pattern calls for full-bleed media or the ink footer.", "section": "colors" },
+      { "name": "The Weight Before Ornament Rule", "body": "Hierarchy comes from scale, weight, and negative space—not outlines, gradient type, or ornamental lettering.", "section": "typography" },
+      { "name": "The Flat-at-Rest Rule", "body": "Default editorial surfaces remain flush; elevation communicates navigation or state, not decoration.", "section": "elevation" }
+    ],
+    "dos": ["Do preserve the measured section order, container widths, and breakpoint-specific art direction.", "Do reserve signal yellow for action, selection, and focus.", "Do keep media dimensions explicit and provide AVIF/WebP responsive sources.", "Do keep editorial cards square and use tonal or photographic depth.", "Do maintain keyboard-complete menu, accordion, and carousel controls."],
+    "donts": ["Don't introduce rounded dashboard-card styling into editorial modules.", "Don't replace measured spacing with generic utility defaults.", "Don't load proprietary fonts or third-party campaign media without explicit authorization.", "Don't add decorative gradients, hard offset shadows, eyebrow labels, or glyph-only controls as a substitute for hierarchy.", "Don't turn the editorial homepage into a hydrated SPA."]
+  }
+}

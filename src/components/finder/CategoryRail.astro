@@ -1,0 +1,53 @@
+---
+import { Picture } from 'astro:assets';
+import { vehicleCards } from '../../data/home';
+import { homeAssets } from '../../data/assets';
+
+const imageMap = {
+  automobile: homeAssets.categoryAutomobile,
+  suv: homeAssets.categorySuv,
+  performance: homeAssets.categoryPerformance,
+  electric: homeAssets.categoryElectric,
+  sports: homeAssets.categorySports,
+};
+---
+
+<section class="category-section" id="catalogo" aria-labelledby="category-title">
+  <h2 class="sr-only" id="category-title">Categorías de llantas</h2>
+  <div class="category-toolbar container">
+    <div class="rail-controls">
+      <button class="rail-button" type="button" data-rail-prev aria-label="Categoría anterior" disabled>←</button>
+      <button class="rail-button" type="button" data-rail-next aria-label="Categoría siguiente">→</button>
+    </div>
+  </div>
+  <div class="category-rail container" data-carousel tabindex="0" aria-label="Categorías de vehículo">
+    {vehicleCards.map((card) => (
+      <a
+        class="category-card"
+        href={card.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${card.title}: solicitar información por WhatsApp; se abre en una nueva pestaña`}
+      >
+        <Picture src={imageMap[card.image]} formats={['avif', 'webp']} widths={[320, 480, 640, 720]} sizes="(max-width: 767px) 86vw, (max-width: 1023px) 46vw, 379px" alt="" loading="lazy" />
+        <span class="card-shade"></span>
+        <div>
+          <h3>{card.title}</h3>
+          <p>{card.description}</p>
+          <strong>Descubre más <span aria-hidden="true">›</span></strong>
+        </div>
+      </a>
+    ))}
+  </div>
+  <div class="rail-progress container" aria-hidden="true"><span></span></div>
+</section>
+
+<style>
+  .category-section{padding:56px 0 64px;background:var(--color-page)}
+  .category-toolbar{display:flex;height:44px;align-items:center;justify-content:flex-end;margin-bottom:12px}
+  .category-rail{display:grid;grid-auto-columns:calc((100% - 48px)/3);grid-auto-flow:column;gap:24px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}.category-rail::-webkit-scrollbar{display:none}
+  .category-card{position:relative;height:474px;overflow:hidden;color:var(--color-paper);scroll-snap-align:start;text-decoration:none}.category-card :global(picture),.category-card :global(img){width:100%;height:100%}.category-card :global(img){object-fit:cover;object-position:center}.card-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgb(0 0 0/.72),rgb(0 0 0/.06) 58%,rgb(0 0 0/.62))}.category-card>div{position:absolute;inset:0;display:flex;flex-direction:column;padding:32px 24px}.category-card h3{max-width:320px;margin:0;font-size:var(--type-card-title);line-height:1.25}.category-card p{max-width:300px;margin:10px 0 0;font-size:var(--type-small);line-height:1.45}.category-card strong{margin-top:auto;font-size:var(--type-ui)}.category-card :global(img){transition:transform .7s var(--ease-out)}.category-card:hover :global(img){transform:scale(1.035)}
+  .rail-progress{display:flex;justify-content:center;margin-top:24px}.rail-progress::before{width:320px;height:2px;background:#ccc;content:""}.rail-progress span{position:absolute;width:86px;height:3px;background:#777}
+  @media (min-width:768px) and (max-width:1023px){.category-section{padding-block:44px 96px}.category-rail{grid-auto-columns:calc((100% - 20px)/2);gap:20px}.category-card{height:450px}}
+  @media (max-width:767px){.category-section{padding:28px 0 64px}.category-toolbar{display:none}.category-rail{width:100%;grid-auto-columns:min(86vw,320px);gap:16px;padding-inline:var(--page-gutter);scroll-padding-inline:var(--page-gutter)}.category-card{height:clamp(390px,112vw,430px)}.category-card>div{padding:24px 18px}.rail-progress{margin-top:18px}.rail-progress::before{width:130px}.rail-progress span{width:44px}}
+</style>

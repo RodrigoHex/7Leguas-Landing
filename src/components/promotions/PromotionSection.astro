@@ -1,0 +1,561 @@
+---
+import { tyrePackages } from '../../data/packages';
+import { createWhatsAppUrl } from '../../data/contact';
+
+const catalogWhatsAppUrl = createWhatsAppUrl(
+  'Hola, quiero conocer el catálogo completo de paquetes de llantas y recibir asesoría. ¿Me pueden ayudar?',
+);
+
+const getPackageWhatsAppUrl = (name: string, price: string): string =>
+  createWhatsAppUrl(
+    `Hola, quiero comprar el ${name} con precio de ${price}. ¿Me pueden ayudar a confirmar disponibilidad y completar mi compra?`,
+  );
+---
+
+<section
+  class="packages"
+  id="promociones"
+  aria-labelledby="packages-title"
+  aria-describedby="packages-instructions"
+  data-package-carousel
+>
+  <div class="packages-heading container">
+    <div class="packages-heading__copy">
+      <p class="packages-eyebrow">Conversa en Línea</p>
+      <h2 class="section-title" id="packages-title">Paquetes de llantas</h2>
+      <p class="packages-intro">
+        Explora algunos de los paquetes más vendidos que tenemos para ti en 7 Leguas
+      </p>
+    </div>
+
+    <div class="packages-actions">
+      <a
+        class="packages-catalog"
+        href={catalogWhatsAppUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Ver catálogo completo por WhatsApp; se abre en una nueva pestaña"
+      >
+        Ver catálogo completo
+        <svg aria-hidden="true" viewBox="0 0 20 20">
+          <path d="m7.5 4.5 5.5 5.5-5.5 5.5"></path>
+        </svg>
+      </a>
+      <div class="packages-controls" role="group" aria-label="Controles del carrusel">
+        <button class="package-control" type="button" data-package-prev aria-label="Ver paquetes anteriores">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg>
+        </button>
+        <button
+          class="package-control package-control--toggle"
+          type="button"
+          data-package-toggle
+          aria-label="Pausar reproducción automática"
+          aria-pressed="false"
+        >
+          <svg class="pause-icon" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M9 6v12M15 6v12"></path>
+          </svg>
+          <svg class="play-icon" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="m9 6 9 6-9 6Z"></path>
+          </svg>
+        </button>
+        <button class="package-control" type="button" data-package-next aria-label="Ver paquetes siguientes">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p class="sr-only" id="packages-instructions">
+    Carrusel de paquetes. Arrastre horizontalmente o use los controles para explorar todos los productos.
+  </p>
+
+  <div class="packages-viewport">
+    <ul class="packages-rail container" data-package-rail tabindex="0">
+      {tyrePackages.map((product) => (
+        <li class="package-slide">
+          <a
+            class="package-card"
+            href={getPackageWhatsAppUrl(product.name, product.price)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Comprar ${product.name} por WhatsApp, ${product.price}; se abre en una nueva ventana`}
+          >
+            <div class="package-card__media">
+              <img
+                src={product.image}
+                width="500"
+                height="500"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+                alt=""
+              />
+              <span class="package-card__badge">{product.quantity} llantas</span>
+            </div>
+            <div class="package-card__body">
+              <h3>{product.name}</h3>
+              <div class="package-card__footer">
+                <div class="package-card__price">
+                  <span class="package-card__price-label">Precio del paquete</span>
+                  <strong>{product.price}</strong>
+                </div>
+                <span class="package-card__link" aria-hidden="true">
+                  Comprar por WhatsApp
+                  <svg viewBox="0 0 32 32">
+                    <path class="whatsapp-bubble" d="M16 4.25A11.25 11.25 0 0 0 6.3 21.2L5 27.75l6.7-1.75A11.25 11.25 0 1 0 16 4.25Z"></path>
+                    <path class="whatsapp-phone" d="M11.3 9.65c.35-.38.67-.4 1-.4h.3c.27.02.42.1.57.46l1.25 3c.11.3.06.53-.1.78l-.6.78c-.2.22-.36.42-.15.78.72 1.25 1.7 2.3 2.9 3.08.38.25.63.22.88-.08l.98-1.2c.23-.28.45-.32.78-.2l2.72 1.28c.38.18.48.37.5.58.04.4-.08 1.35-.6 2.1-.58.82-1.55 1.28-2.58 1.32-1.33.05-3.4-.55-5.84-2.65-2.02-1.75-3.4-3.82-3.78-5.48-.38-1.65.06-3.3.78-4.15Z"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<script>
+  const packagesSection = document.querySelector<HTMLElement>('[data-package-carousel]');
+  const floatingWhatsApp = document.querySelector<HTMLElement>('[data-whatsapp-quote]');
+
+  if (packagesSection && floatingWhatsApp) {
+    const floatingButtonObserver = new IntersectionObserver(
+      ([entry]) => floatingWhatsApp.classList.toggle('is-hidden-for-packages', entry?.isIntersecting ?? false),
+      { threshold: 0.12 },
+    );
+
+    floatingButtonObserver.observe(packagesSection);
+  }
+</script>
+
+<style>
+  .packages {
+    overflow: hidden;
+    padding: 88px 0 104px;
+    background: #eceeec;
+    scroll-margin-top: var(--header-height);
+  }
+
+  .packages-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+    margin-bottom: 42px;
+  }
+
+  .packages-heading__copy { max-width: 720px; }
+
+  .packages-eyebrow {
+    margin: 0 0 8px;
+    color: #595959;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    margin-bottom: 14px;
+    letter-spacing: -0.03em;
+  }
+
+  .packages-intro {
+    margin: 0;
+    color: #4e514f;
+    font-size: var(--type-body);
+    line-height: 1.6;
+  }
+
+  .packages-actions,
+  .packages-controls {
+    display: flex;
+    align-items: center;
+  }
+
+  .packages-actions {
+    flex: 0 0 auto;
+    gap: 14px;
+  }
+
+  .packages-controls { gap: 8px; }
+
+  .packages-catalog {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid #bfc2bf;
+    border-radius: var(--radius-control);
+    padding: 0 16px;
+    background: rgb(255 255 255 / 0.55);
+    color: var(--color-ink);
+    font-size: var(--type-ui);
+    font-weight: 800;
+    text-decoration: none;
+    transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .packages-catalog:hover {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .packages-catalog svg,
+  .package-card__link svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+    transition: transform var(--transition-fast);
+  }
+
+  .packages-catalog:hover svg { transform: translateX(3px); }
+
+  .package-control {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 1px solid #c8cbc8;
+    border-radius: var(--radius-control);
+    background: rgb(255 255 255 / 0.75);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .package-control:hover {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .package-control:disabled {
+    border-color: #dedede;
+    background: #f7f7f7;
+    color: #a2a2a2;
+    cursor: not-allowed;
+  }
+
+  .package-control svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  .package-control .play-icon {
+    display: none;
+    fill: currentColor;
+    stroke: currentColor;
+  }
+
+  .package-control--toggle[aria-pressed='true'] .pause-icon { display: none; }
+  .package-control--toggle[aria-pressed='true'] .play-icon { display: block; }
+
+  .packages-viewport {
+    overflow: hidden;
+    padding-bottom: 8px;
+  }
+
+  .packages-rail {
+    display: grid;
+    grid-auto-columns: calc((100% - 72px) / 4);
+    grid-auto-flow: column;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 0 0 24px;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    scroll-snap-type: inline mandatory;
+    cursor: grab;
+    list-style: none;
+    touch-action: pan-x pan-y pinch-zoom;
+    user-select: none;
+  }
+
+  .packages-rail::-webkit-scrollbar { display: none; }
+
+  .packages-rail.is-dragging {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+    cursor: grabbing;
+  }
+
+  .package-slide {
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .package-card {
+    display: flex;
+    height: 100%;
+    min-height: 522px;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 14px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    box-shadow: 0 14px 34px rgb(22 31 25 / 0.08);
+    text-decoration: none;
+    transition: box-shadow var(--transition-medium), transform var(--transition-medium);
+  }
+
+  .package-card:hover {
+    box-shadow: 0 20px 44px rgb(22 31 25 / 0.14);
+    transform: translateY(-5px);
+  }
+
+  .package-card:focus-visible {
+    outline: 3px solid #126a35;
+    outline-offset: 3px;
+  }
+
+  .package-card__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: #f8f9f7;
+  }
+
+  .package-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform var(--transition-medium);
+    -webkit-user-drag: none;
+  }
+
+  .package-card:hover .package-card__media img { transform: scale(1.035); }
+
+  .package-card__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 8px 10px 7px;
+    background: var(--color-yellow);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .package-card__body {
+    display: flex;
+    min-height: 224px;
+    flex: 1;
+    flex-direction: column;
+    padding: 22px;
+  }
+
+  .package-card h3 {
+    display: -webkit-box;
+    min-height: 60px;
+    margin: 0;
+    overflow: hidden;
+    font-size: var(--type-body);
+    line-height: 1.3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .package-card__footer {
+    display: grid;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 22px;
+  }
+
+  .package-card__price {
+    display: block;
+  }
+
+  .package-card__price-label {
+    display: block;
+    margin-bottom: 2px;
+    color: #626662;
+    font-size: var(--type-label);
+    font-weight: 600;
+  }
+
+  .package-card strong {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .package-card__link {
+    display: inline-flex;
+    width: 100%;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--radius-control);
+    padding: 0 14px;
+    background: #25d366;
+    color: #102617;
+    font-size: var(--type-ui);
+    font-weight: 800;
+    white-space: nowrap;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .package-card:hover .package-card__link {
+    background: #31df72;
+    transform: translateY(-1px);
+  }
+
+  .package-card__link svg {
+    width: 20px;
+    height: 20px;
+    transition: none;
+  }
+
+  .package-card__link .whatsapp-bubble {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  .package-card__link .whatsapp-phone {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  @media (max-width: 1199px) {
+    .packages-rail {
+      grid-auto-columns: calc((100% - 40px) / 3);
+      gap: 20px;
+    }
+
+    .package-card__body { padding: 20px; }
+  }
+
+  @media (max-width: 899px) {
+    .packages { padding: 72px 0 80px; }
+
+    .packages-heading {
+      align-items: start;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .packages-actions {
+      align-items: end;
+      flex-direction: column-reverse;
+      gap: 10px;
+    }
+
+    .packages-catalog { min-height: 44px; }
+
+    .packages-rail { grid-auto-columns: calc((100% - 20px) / 2); }
+  }
+
+  @media (max-width: 767px) {
+    .packages {
+      padding: 56px 0 64px;
+      scroll-margin-top: var(--header-mobile-height);
+    }
+
+    .packages-heading {
+      display: grid;
+      gap: 26px;
+      margin-bottom: 30px;
+    }
+
+    .packages-intro {
+      max-width: 350px;
+    }
+
+    .packages-actions {
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+    }
+
+    .packages-controls { gap: 6px; }
+
+    .package-control {
+      width: 42px;
+      height: 42px;
+    }
+
+    .packages-viewport { overflow: visible; }
+
+    .packages-rail {
+      width: 100%;
+      grid-auto-columns: min(86vw, 340px);
+      gap: 16px;
+      padding-right: var(--page-gutter);
+      padding-left: var(--page-gutter);
+      scroll-padding-inline: var(--page-gutter);
+    }
+
+    .package-card { min-height: 508px; }
+
+    .package-card__body {
+      min-height: 210px;
+      padding: 20px;
+    }
+
+    .package-card h3 {
+      min-height: 56px;
+    }
+
+    .package-card__footer {
+      gap: 14px;
+      padding-top: 18px;
+    }
+
+    .package-card__link {
+      min-height: 46px;
+    }
+
+    .package-card__link svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 379px) {
+    .packages-catalog {
+      max-width: 124px;
+      font-size: 12px;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .package-control {
+      width: 40px;
+      height: 40px;
+    }
+
+    .package-card strong { font-size: 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .package-card,
+    .package-card__media img,
+    .package-card__link { transition: none; }
+
+    .package-card:hover,
+    .package-card:hover .package-card__link { transform: none; }
+  }
+</style>

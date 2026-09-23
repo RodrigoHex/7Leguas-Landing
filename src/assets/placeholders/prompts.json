@@ -1,0 +1,11 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "generatedAt": "2026-09-01",
+  "assets": {
+    "hero-automotive.png": "Brand-neutral photorealistic premium tyre and red SUV at golden hour; wide hero with left negative space; no logos or text.",
+    "hero-automotive-mobile.png": "Portrait 9:16 art-direction variant of the brand-neutral red performance SUV on a golden-hour mountain road; dark upper-left copy space; no logos or text.",
+    "autumn-road.png": "Brand-neutral photorealistic autumn road, central red SUV and large tyre foreground; wide feature banner; no logos or text.",
+    "technology-car.png": "Brand-neutral lime-yellow grand touring car driving through a city at blue hour; wide editorial composition; no logos or text.",
+    "factory-robots.png": "Brand-neutral photorealistic modern tyre factory with red robotic arms; cool industrial lighting; no logos or text."
+  }
+}

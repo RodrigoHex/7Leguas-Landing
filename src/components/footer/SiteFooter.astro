@@ -1,0 +1,55 @@
+---
+import { brand, footerGroups } from '../../data/home';
+---
+
+<footer class="site-footer" id="footer">
+  <div class="footer-inner container">
+    <div class="footer-top">
+      <strong>{brand.wordmark} - {brand.market}</strong>
+      <div class="socials" aria-label="Redes sociales">
+        <span>Síganos en</span>
+        <a href="#footer" aria-label="Facebook">f</a>
+        <a href="#footer" aria-label="X">x</a>
+        <a href="#footer" aria-label="YouTube">▶</a>
+        <a href="#footer" aria-label="LinkedIn">in</a>
+        <a href="#footer" aria-label="Instagram">◎</a>
+      </div>
+    </div>
+
+    <nav class="footer-grid" aria-label="Navegación del pie">
+      {footerGroups.map((group) => (
+        <div>
+          <h3>{group.title}</h3>
+          {group.links.map((link) => <a href="#main-content">{link}</a>)}
+        </div>
+      ))}
+    </nav>
+
+    <div class="footer-accordion">
+      {footerGroups.map((group) => (
+        <details>
+          <summary>{group.title}</summary>
+          <div>{group.links.map((link) => <a href="#main-content">{link}</a>)}</div>
+        </details>
+      ))}
+    </div>
+
+    <div class="footer-bottom">
+      <span>Copyright © 2026 7Leguas. Maqueta de referencia.</span>
+      <nav aria-label="Información legal">
+        <a href="#footer">Información legal</a>
+        <a href="#footer">Aviso de privacidad</a>
+        <a href="#footer">Política de cookies</a>
+        <a href="#footer">Trabaja con nosotros</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer{padding:32px 0 20px;background:#181818;color:var(--color-paper)}.footer-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #303030;padding-bottom:20px;font-size:var(--type-ui)}.socials{display:flex;align-items:center;gap:8px}.socials>span{margin-right:8px;color:#bbb}.socials a{display:grid;width:40px;height:40px;place-items:center;border:1px solid #555;border-radius:50%;font-size:11px;font-weight:800;text-decoration:none}
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1.4fr 1.2fr .8fr 1fr 1fr;gap:28px;padding:30px 0 24px}.footer-grid h3{margin:0 0 13px;font-size:var(--type-label);line-height:16px;letter-spacing:.02em}.footer-grid a{display:block;margin:0 0 7px;color:#bdbdbd;font-size:11px;line-height:16px;text-decoration:none;text-transform:uppercase}.footer-grid a:hover{color:white}.footer-accordion{display:none}.footer-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #303030;padding-top:16px;color:#999;font-size:10px;line-height:16px;text-transform:uppercase}.footer-bottom nav{display:flex;gap:16px}.footer-bottom a{display:inline-flex;min-height:28px;align-items:center;text-decoration:none}
+  @media (min-width:768px) and (max-width:1023px){.footer-grid{grid-template-columns:repeat(3,1fr);gap:28px 40px}.footer-bottom{align-items:flex-start;gap:24px}.footer-bottom nav{justify-content:flex-end;flex-wrap:wrap}}
+  @media (max-width:767px){.site-footer{padding:28px 0 20px}.footer-top{display:block}.socials{flex-wrap:wrap;margin-top:18px}.socials>span{width:100%;margin:0 0 2px}.socials a{width:44px;height:44px}.footer-grid{display:none}.footer-accordion{display:block;padding:18px 0}.footer-accordion details{border-bottom:1px solid #383838}.footer-accordion summary{position:relative;display:flex;min-height:52px;align-items:center;padding:10px 32px 10px 0;font-size:var(--type-ui);font-weight:800;list-style:none;cursor:pointer}.footer-accordion summary::after{position:absolute;right:2px;content:"+"}.footer-accordion details[open] summary::after{content:"−"}.footer-accordion details div{display:grid;gap:4px;padding:0 0 14px}.footer-accordion a{display:flex;min-height:44px;align-items:center;color:#bbb;font-size:var(--type-label);text-decoration:none;text-transform:uppercase}.footer-bottom{display:block;padding-top:18px;font-size:10px;line-height:16px}.footer-bottom nav{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:14px}.footer-bottom a{min-height:40px}}
+  .footer-grid a{display:flex;min-height:24px;align-items:center;margin:0}
+</style>

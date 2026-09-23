@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = '7Leguas | Tecnología y rendimiento automotriz',
+  description = 'Maqueta de referencia de una experiencia automotriz editorial, rápida, accesible y preparada para rebranding.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Organization', name: '7Leguas', url: canonical.origin },
+    { '@type': 'WebSite', name: '7Leguas', url: canonical.origin, inLanguage: 'es-MX' },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#1f1f1f" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- THESIS: A measured automotive editorial homepage replica, not a generic landing-page reinterpretation.
+    OWN-WORLD: light grey page fields, ink-black media, signal-yellow actions, square editorial cards and dense Gotham-like typography.
+    STORY: visitors identify a tyre path, scan campaigns and products, learn, locate service, then explore specialist categories.
+    FIRST VIEWPORT: fixed two-tier navigation over a full-height automotive hero; large left headline and a yellow finder docked above the fold.
+    FORM: user-pinned reference reconstruction, ranked direction 1, seed reference-pinned-2026-09-01.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance -->
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <slot />
+  </body>
+</html>

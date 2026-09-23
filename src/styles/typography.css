@@ -1,0 +1,21 @@
+@import "@fontsource-variable/montserrat";
+
+html {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  font-synthesis: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}

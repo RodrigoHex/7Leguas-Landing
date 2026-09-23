@@ -1,0 +1,16 @@
+{
+  "name": "7Leguas",
+  "short_name": "7Leguas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f1f1f1",
+  "theme_color": "#1f1f1f",
+  "icons": [
+    {
+      "src": "/favicon.webp",
+      "sizes": "227x143",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}

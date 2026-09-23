@@ -1,0 +1,26 @@
+---
+import { whatsappQuote } from '../../data/home';
+---
+
+<a
+  class="whatsapp-quote"
+  href={whatsappQuote.href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Solicitar una cotización por WhatsApp; se abre en una nueva ventana"
+  data-whatsapp-quote
+>
+  <svg aria-hidden="true" viewBox="0 0 32 32">
+    <path class="bubble" d="M16 4.25A11.25 11.25 0 0 0 6.3 21.2L5 27.75l6.7-1.75A11.25 11.25 0 1 0 16 4.25Z" />
+    <path class="phone" d="M11.3 9.65c.35-.38.67-.4 1-.4h.3c.27.02.42.1.57.46l1.25 3c.11.3.06.53-.1.78l-.6.78c-.2.22-.36.42-.15.78.72 1.25 1.7 2.3 2.9 3.08.38.25.63.22.88-.08l.98-1.2c.23-.28.45-.32.78-.2l2.72 1.28c.38.18.48.37.5.58.04.4-.08 1.35-.6 2.1-.58.82-1.55 1.28-2.58 1.32-1.33.05-3.4-.55-5.84-2.65-2.02-1.75-3.4-3.82-3.78-5.48-.38-1.65.06-3.3.78-4.15Z" />
+  </svg>
+  <span>{whatsappQuote.label}</span>
+</a>
+
+<style>
+  .whatsapp-quote{position:fixed;z-index:calc(var(--z-header) - 1);right:clamp(18px,2.2vw,34px);bottom:calc(22px + env(safe-area-inset-bottom,0px));display:inline-flex;min-height:56px;align-items:center;gap:10px;border-radius:999px;padding:0 18px 0 14px;background:#25d366;color:#102617;box-shadow:0 10px 28px rgb(0 0 0/.24);font-size:13px;font-weight:800;text-decoration:none;transition:background var(--transition-fast),box-shadow var(--transition-fast),opacity var(--transition-fast),transform var(--transition-fast)}
+  .whatsapp-quote svg{width:28px;height:28px;flex:0 0 auto}.bubble{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.phone{fill:currentColor}
+  .whatsapp-quote:hover{background:#3be079;box-shadow:0 14px 34px rgb(0 0 0/.3);transform:translateY(-2px)}.whatsapp-quote:active{transform:translateY(0)}
+  .whatsapp-quote.is-hidden-for-packages{opacity:0;pointer-events:none;transform:translateY(12px)}
+  @media (max-width:480px){.whatsapp-quote{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;padding:0;justify-content:center}.whatsapp-quote span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
+</style>

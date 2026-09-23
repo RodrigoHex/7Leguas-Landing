@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reference-automotive.example/sitemap-index.xml

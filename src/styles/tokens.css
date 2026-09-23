@@ -1,0 +1,53 @@
+:root {
+  --color-yellow: #ffd900;
+  --color-yellow-hover: #ffe44d;
+  --color-ink: #1f1f1f;
+  --color-ink-soft: #555555;
+  --color-page: #f1f1f1;
+  --color-paper: #fcfcfc;
+  --color-white: #ffffff;
+  --color-border: #d6d6d6;
+  --color-muted: #686868;
+  --page-max-width: 1440px;
+  --page-gutter: clamp(24px, 8.333vw, 160px);
+  --page-inner: min(calc(100% - (2 * var(--page-gutter))), var(--page-max-width));
+  --section-gap: 72px;
+  --section-gap-mobile: 48px;
+  --header-height: 64px;
+  --header-mobile-height: 64px;
+  --font-display: "Montserrat Variable", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Montserrat Variable", Arial, sans-serif;
+  --type-display: clamp(3rem, 4.45vw, 4rem);
+  --type-section-title: clamp(2rem, 3.62vw, 3.25rem);
+  --type-card-title: clamp(1.5rem, 2.22vw, 2rem);
+  --type-body: 1rem;
+  --type-small: 0.875rem;
+  --type-ui: 0.8125rem;
+  --type-label: 0.75rem;
+  --radius-control: 4px;
+  --radius-card: 0px;
+  --shadow-header: 0 6px 24px rgb(0 0 0 / 0.12);
+  --shadow-card: 0 8px 24px rgb(0 0 0 / 0.12);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 180ms var(--ease-out);
+  --transition-medium: 360ms var(--ease-out);
+  --z-header: 80;
+  --z-menu: 75;
+  --z-overlay: 60;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --page-gutter: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --page-gutter: clamp(16px, 5.13vw, 20px);
+    --section-gap: var(--section-gap-mobile);
+    --type-display: 2rem;
+    --type-section-title: clamp(1.875rem, 8.2vw, 2.25rem);
+    --type-card-title: 1.5rem;
+  }
+}

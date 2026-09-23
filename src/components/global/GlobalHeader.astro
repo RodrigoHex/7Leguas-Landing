@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/logo.webp';
+import { createWhatsAppUrl } from '../../data/contact';
+
+const dealerWhatsAppUrl = createWhatsAppUrl(
+  'Hola, quiero información sobre la ubicación y atención de su distribuidor. ¿Me pueden ayudar?',
+);
+---
+
+<header class="site-header" data-site-header>
+  <nav class="main-nav" aria-label="Navegación principal">
+    <a class="wordmark" href="#main-content" aria-label="7Leguas, inicio">
+      <Image src={logo} width={96} alt="7Leguas" loading="eager" decoding="sync" />
+    </a>
+
+    <a
+      class="dealer-link"
+      href={dealerWhatsAppUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Consultar información del distribuidor por WhatsApp; se abre en una nueva pestaña"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M12 21s7-5.1 7-12A7 7 0 1 0 5 9c0 6.9 7 12 7 12Z"></path>
+        <circle cx="12" cy="9" r="2.5"></circle>
+      </svg>
+      <span>Distribuidor</span>
+    </a>
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const syncHeader = () => header?.classList.toggle('is-solid', window.scrollY > 32);
+
+  syncHeader();
+  window.addEventListener('scroll', syncHeader, { passive: true });
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    z-index: var(--z-header);
+    inset: 0 0 auto;
+    height: var(--header-height);
+    color: var(--color-paper);
+    transition: background var(--transition-medium), color var(--transition-medium), box-shadow var(--transition-medium);
+  }
+
+  .site-header.is-solid {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    box-shadow: var(--shadow-header);
+  }
+
+  .main-nav {
+    display: flex;
+    width: calc(100% - 240px);
+    height: 100%;
+    max-width: var(--page-max-width);
+    align-items: center;
+    margin: auto;
+  }
+
+  .wordmark {
+    display: flex;
+    width: 96px;
+    height: 60px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .wordmark :global(img) {
+    width: 96px;
+    height: auto;
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.2));
+  }
+
+  .dealer-link {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    border-radius: var(--radius-control);
+    padding: 0 16px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .site-header.is-solid .dealer-link {
+    border: 1px solid var(--color-border);
+  }
+
+  .dealer-link svg {
+    width: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+  }
+
+  @media (max-width: 1100px) {
+    .main-nav { width: calc(100% - 80px); }
+  }
+
+  @media (max-width: 900px) {
+    .site-header {
+      height: var(--header-mobile-height);
+      background: linear-gradient(to bottom, rgb(0 0 0 / 0.38), transparent);
+    }
+
+    .site-header.is-solid { background: var(--color-paper); }
+
+    .main-nav {
+      width: 100%;
+      padding: 0 var(--page-gutter);
+    }
+
+    .wordmark,
+    .wordmark :global(img) { width: 84px; }
+
+    .wordmark { height: 53px; }
+
+    .dealer-link {
+      min-height: 44px;
+      padding: 0 12px;
+      font-size: var(--type-label);
+    }
+
+    .site-header.is-solid .dealer-link { background: #f4f4f4; }
+    .dealer-link svg { width: 17px; }
+  }
+
+  @media (max-width: 359px) {
+    .main-nav { padding-inline: 14px; }
+
+    .wordmark,
+    .wordmark :global(img) { width: 76px; }
+
+    .dealer-link { padding-inline: 10px; }
+  }
+</style>
